@@ -3,7 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
+    public float speed;
 
+    private Rigidbody rb;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
+    void FixedUpdate()
+    {
+        float moveHorizontal = Input.GetAxis("Horizontal");
+        float moveVertical = Input.GetAxis("Vertical");
+        moveHorizontal *= 2;
+        moveHorizontal *= 2;
+
+        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+
+        rb.AddForce(movement * speed);
+
+
+    }
+
+    /*
     public float speed = 6.0f;
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
@@ -43,4 +66,5 @@ public class PlayerController : MonoBehaviour {
         controller.Move(moveDirection * Time.deltaTime);
 
     }
+*/
 }
