@@ -40,6 +40,16 @@ public class MenuHandler : MonoBehaviour {
         SceneManager.LoadScene(0);
     }
 
+    public int currentSceneId()
+    {
+        return SceneManager.GetActiveScene().buildIndex;
+    }
+
+    public int maxScenes()
+    {
+        return SceneManager.sceneCount;
+    }
+
     public void ShowMenu()
     {
         menuCanvas.SetActive(true);

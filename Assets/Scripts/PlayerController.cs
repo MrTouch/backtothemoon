@@ -20,11 +20,13 @@ public class PlayerController : MonoBehaviour {
     private MenuHandler mh;
     private bool won;
     private bool lost;
-    private bool showingMenu;
+    public bool showingMenu;
+    PlayerData playerData;
 
     void Start()
     {
         mh = new MenuHandler();
+        playerData = new PlayerData(mh.maxScenes());
         rb = GetComponent<Rigidbody>();
         TimeText.text = "Time: " + Timer.ToString().Substring(0,4);
         won = false;
@@ -32,6 +34,7 @@ public class PlayerController : MonoBehaviour {
         showingMenu = false;
         GameOverGui.SetActive(false);
         WinGui.SetActive(false);
+        playerData = PlayerData.Load(Application.persistentDataPath + "/PlayerInfo.dat");
     }
 
     private void Update()
@@ -113,6 +116,7 @@ public class PlayerController : MonoBehaviour {
         if (collision.gameObject.tag == "Terrain")
         {
             isgrounded = true;
+            Invoke("setCamera", 4);
             displayUiElements("lose");
         }
     }
@@ -145,11 +149,24 @@ public class PlayerController : MonoBehaviour {
         {
             won = true;
             WinGui.SetActive(true);
+            
         }
         else if(state == "lose")
         {
             lost = true;
             GameOverGui.SetActive(true);
         }
+    }
+    private void HighscoreHandling()
+    {
+        MenuHandler mh = new MenuHandler();
+        playerData.SetScore(mh.currentSceneId(), Timer);
+        playerData.Save(Application.persistentDataPath + "/PlayerInfo.dat");
+
+    }
+
+    private void setCamera()
+    {
+        finishCamera = false;
     }
 }

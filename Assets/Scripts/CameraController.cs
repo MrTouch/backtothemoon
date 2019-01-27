@@ -22,5 +22,10 @@ public class CameraController : MonoBehaviour {
             transform.rotation = Quaternion.Euler(90,0,0);
             Debug.Log("Switch to finish Camera");
         }
+        if (player.GetComponent<PlayerController>().finishCamera == false && player.GetComponent<PlayerController>().showingMenu == true)
+        {
+            transform.rotation = Quaternion.Euler(20, 0, 0);
+            Debug.Log("Switch to finish Camera");
+        }
     }
 }
