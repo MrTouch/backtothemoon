@@ -12,7 +12,7 @@ public class MenuHandler : MonoBehaviour {
     public GameObject WinCanvas;
     public GameObject StoryCanvas;
 
-    private int currentStory;
+    public int currentStory;
     public GameObject Story0;
     public GameObject Story1;
     public GameObject Story2;
@@ -65,12 +65,12 @@ public class MenuHandler : MonoBehaviour {
 
     public void ShowMenu()
     {
+        menuCanvas.SetActive(true);
         creditsCanvas.SetActive(false);
         HighscoreCanvas.SetActive(false);
         WinCanvas.SetActive(false);
         GameOverCanvas.SetActive(false);
         StoryCanvas.SetActive(false);
-        menuCanvas.SetActive(true);
     }
 
     public void ShowHighscores()
@@ -91,57 +91,75 @@ public class MenuHandler : MonoBehaviour {
 
     public void ShowStory()
     {
-        storytime = true;
         StoryCanvas.SetActive(true);
         menuCanvas.SetActive(false);
         creditsCanvas.SetActive(false);
         HighscoreCanvas.SetActive(false);
         WinCanvas.SetActive(false);
         GameOverCanvas.SetActive(false);
-    }
-    public void initStory()
-    {
-        currentStory = 0;
+        nextStory();
     }
     public void nextStory()
     {
+        Debug.Log("next story");
+        storytime = true;
+        Debug.Log(currentStory);
         switch (currentStory)
         {
             case 0:
-                menuCanvas.SetActive(false);
+                try
+                {
+                    menuCanvas.SetActive(false);
+                    creditsCanvas.SetActive(false);
+                    HighscoreCanvas.SetActive(false);
+                    WinCanvas.SetActive(false);
+                    GameOverCanvas.SetActive(false);
+                    StoryCanvas.SetActive(true);
+
+                }
+                catch(System.Exception e)
+                {
+                    Debug.Log("error" + e);
+                }
                 Story0.SetActive(true);
+                currentStory += 1;
                 break;
             case 1:
                 Story0.SetActive(false);
                 Story1.SetActive(true);
+                currentStory += 1;
                 break;
             case 2:
                 Story1.SetActive(false);
                 Story2.SetActive(true);
+                currentStory += 1;
                 break;
             case 3:
                 Story2.SetActive(false);
                 Story3.SetActive(true);
+                currentStory += 1;
                 break;
             case 4:
                 Story3.SetActive(false);
                 Story4.SetActive(true);
+                currentStory += 1;
                 break;
             case 5:
                 Story4.SetActive(false);
                 Story5.SetActive(true);
+                currentStory += 1;
                 break;
             case 6:
                 Story5.SetActive(false);
                 Story6.SetActive(true);
+                currentStory += 1 ;
                 break;
             case 7:
                 Story6.SetActive(false);
                 menuCanvas.SetActive(true);
                 currentStory = 0;
                 break;
-                
         }
-        currentStory += 1;
+        Debug.Log("ADD");
     }
 }

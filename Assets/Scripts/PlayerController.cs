@@ -50,14 +50,17 @@ public class PlayerController : MonoBehaviour {
             mh.reloadScene();
             print("up arrow key is held down");
         }
-        if (showingMenu && mh.storytime)
+        if (Input.GetKey(KeyCode.S))
         {
-            if (Input.GetKey(KeyCode.N))
+            Debug.Log("S EVENT");
+            if (showingMenu)
             {
                 mh.nextStory();
                 print("next story");
             }
+
         }
+
         if (showingMenu && won)
         {
             if (Input.GetKey(KeyCode.N))
