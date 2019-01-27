@@ -20,6 +20,10 @@ public class CameraController : MonoBehaviour {
         {
             transform.position = new Vector3(transform.position.x, transform.position.y+3.52f, transform.position.z + 2.26f);
             transform.rotation = Quaternion.Euler(90,0,0);
+        }
+        if (player.GetComponent<PlayerController>().finishCamera == false && player.GetComponent<PlayerController>().showingMenu == true)
+        {
+            transform.rotation = Quaternion.Euler(20, 0, 0);
             Debug.Log("Switch to finish Camera");
         }
     }
